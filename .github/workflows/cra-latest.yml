@@ -1,7 +1,10 @@
 # on:
 #   schedule:
 #     - cron: '0 0 * * *' # every 24 hours at midnight
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - 'astone123/ct-automated-tests'
 
 jobs:
   cra-latest:
