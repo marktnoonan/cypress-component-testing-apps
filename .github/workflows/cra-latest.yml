@@ -1,0 +1,25 @@
+# on:
+#   schedule:
+#     - cron: '0 0 * * *' # every 24 hours at midnight
+on: workflow_dispatch
+
+jobs:
+  cra-latest:
+    name: Create React App Latest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Go to react-cra5-ts project
+        run: |
+          cd react-cra5-ts/
+      - name: Install Dependencies
+        run: |
+          yarn
+      - name: Upgrade react-scripts to latest version
+        run: |
+          yarn upgrade react-scripts --latest
+          yarn list --pattern react-scripts
+      - name: Run component tests
+        run: |
+          yarn cypress run --component
