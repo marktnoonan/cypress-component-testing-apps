@@ -10,12 +10,12 @@ jobs:
   cra-latest:
     name: Create React App Latest
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./react-cra5-ts/
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-      - name: Go to react-cra5-ts project
-        run: |
-          cd react-cra5-ts/
       - name: Install Dependencies
         run: |
           yarn
