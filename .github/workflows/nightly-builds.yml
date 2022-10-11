@@ -1,0 +1,12 @@
+name: nightly-builds
+on:
+  schedule:
+    - cron: "0 13 * * 3"
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+        node-version: '18'
+      - run: node ./script.mjs
