@@ -1,15 +1,1 @@
-{
-  "angular-newest": {
-    "tag": "@angular/core",
-    "error": {
-      "shortMessage": "Command failed with exit code 1: npx cypress run --component --record --key 7e84281f-826a-490f-8cd1-089c81f110cd --tag angular,cypress@^10.5.0,@angular/core@^15.0.0-next.5",
-      "command": "npx cypress run --component --record --key 7e84281f-826a-490f-8cd1-089c81f110cd --tag angular,cypress@^10.5.0,@angular/core@^15.0.0-next.5",
-      "escapedCommand": "npx cypress run --component --record --key 7e84281f-826a-490f-8cd1-089c81f110cd --tag \"angular,cypress@^10.5.0,@angular/core@^15.0.0-next.5\"",
-      "exitCode": 1,
-      "failed": true,
-      "timedOut": false,
-      "isCanceled": false,
-      "killed": false
-    }
-  }
-}
+{}
