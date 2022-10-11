@@ -3,6 +3,8 @@ import * as path from "path";
 import { execa } from "execa";
 import crypto from "crypto";
 import * as fs from "fs/promises";
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 /** @type {Array<{ projectName: string, filters: string[], tag: string }>} */
 const projects = [
@@ -58,10 +60,19 @@ async function getPackageJson(projectName) {
   );
 }
 
-const cwd = process.cwd();
+async function getFailedRuns() {
+  return JSON.parse(await fs.readFile("./project-fails.json", "utf-8"));
+}
 
-/** @type {(projectHashes: { [key: string]: { newest: string, latest: string } }, project: { projectName: string, filters: string[], tag: string })} */
-async function run(projectHashes, { projectName, filters, tag }) {
+async function saveFailedRuns(content) {
+  await fs.writeFile("./project-fails.json", JSON.stringify(content, null, 2));
+}
+
+const cwd = process.cwd();
+const recordKey = process.env.CYPRESS_RECORD_KEY
+
+/** @type {(projectHashes: { [key: string]: { newest: string, latest: string } }, projectFails: { [key: string]: {tag: string, error: string}}, project: { projectName: string, filters: string[], tag: string })} */
+async function run(projectHashes, projectFails, { projectName, filters, tag }) {
   const targets = ["latest", "newest"];
 
   for (const target of targets) {
@@ -117,19 +128,30 @@ async function run(projectHashes, { projectName, filters, tag }) {
           "cypress",
           "run",
           "--component",
-          // "--record",
-          // "--key",
-          // "xxxxxxxx", // Replace with real
-          // "--tag",
-          // tags.join(","),
+          "--record",
+          "--key",
+          recordKey,
+          "--tag",
+          tags.join(","),
         ],
         {
           stdio: "inherit",
           cwd: path.join(cwd, projectName),
         }
       );
+
     } catch (e) {
-      console.error(e);
+      console.log('error outside execa')
+      console.log(e)
+
+      if (!projectFails[`${projectName}-${target}`]) {
+        projectFails[`${projectName}-${target}`] = {};
+      }
+      
+      projectFails[`${projectName}-${target}`]['tag'] = tag;
+      projectFails[`${projectName}-${target}`]['error'] = e;
+
+      await saveFailedRuns(projectFails)
     }
 
     if (!projectHashes[projectName]) {
@@ -146,8 +168,11 @@ async function run(projectHashes, { projectName, filters, tag }) {
 
 async function main() {
   const projectHashes = await getProjectHashes();
+  // clearing failed runs
+  await fs.writeFile("./project-fails.json", JSON.stringify({}));
+  const projectFails = await getFailedRuns();
   for (const project of projects) {
-    await run(projectHashes, project);
+    await run(projectHashes, projectFails, project);
   }
 }
 
@@ -158,4 +183,8 @@ main();
  * {
  * FrameworkName: {newest: hashValue, latest: hashValue}
  * }
+ */
+/**
+ * For all failed runs:
+ * FrameworkName-target: {tag: tagValue , error: errorValue}
  */
