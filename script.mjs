@@ -89,10 +89,21 @@ async function slackErrors () {
   for (const [projectName, value]  of Object.entries(newProjectFails)) {
     content['blocks'].push({"type": "divider"})
     content['blocks'].push({ "type": "section", "fields": []})
+    content['blocks'].push({'type': "actions", 'elements': [] })
     content['blocks'][iterator]['fields'].push({ "type": "mrkdwn", "text": `*Project Name:*\n ${projectName}`})
     content['blocks'][iterator]['fields'].push({ "type": "mrkdwn", "text": `*Tag:*\n ${value['tag']}`})
     content['blocks'][iterator]['fields'].push({ "type": "mrkdwn", "text": `*Error:*\n ${JSON.stringify(value['error'])}`})
-    iterator += 2;
+    content['blocks'][iterator + 1]['elements'].push({
+      "type": "button",
+      "text": {
+        "type": "plain_text",
+        "emoji": true,
+        "text": "Link to CI"
+      },
+      "style": "primary",
+      "value": "click_me_123"
+    })
+    iterator += 3;
   }
 
   axios.post(process.env.slackHook.toString(), content)
@@ -209,7 +220,3 @@ async function main() {
 };
 
 main();
-
-/**
- * 
- */
