@@ -95,7 +95,7 @@ async function slackErrors () {
     iterator += 2;
   }
 
-  axios.post('https://hooks.slack.com/services/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', content)
+  axios.post(process.env.slackHook.toString(), content)
   
 }
 
