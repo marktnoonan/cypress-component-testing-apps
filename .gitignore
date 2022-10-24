@@ -12,6 +12,8 @@ coverage
 build
 dist
 
+.out
+
 # misc
 .DS_Store
 .env.local
