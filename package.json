@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/cypress-io/cypress-component-testing-apps/issues"
   },
-  "homepage": "https://github.com/cypress-io/cypress-component-testing-apps#readme"
+  "homepage": "https://github.com/cypress-io/cypress-component-testing-apps#readme",
+  "msw": {
+    "workerDirectory": "src"
+  }
 }
