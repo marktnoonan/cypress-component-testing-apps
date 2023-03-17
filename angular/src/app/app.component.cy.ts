@@ -8,11 +8,6 @@ import { LoginService } from './login.service';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { worker } from '../mocks';
 
-before(() => {
-  worker.start({
-    onUnhandledRequest: 'bypass',
-  });
-});
 
 describe('AppComponent', () => {
   const config: MountConfig<AppComponent> = {
