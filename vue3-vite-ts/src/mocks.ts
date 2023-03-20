@@ -1,6 +1,10 @@
 import { rest, setupWorker } from 'msw';
 
 export const handlers = [
+  rest.get("/blah", (_req, res, ctx) => {
+    return res(ctx.status(201), ctx.json({ ok: "foo" }));
+  }),
+
   rest.post<{ username: string; password: string }>(
     '/auth',
     (req, res, ctx) => {

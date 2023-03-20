@@ -1,11 +1,19 @@
 <template>
   <button
     class="py-2 px-6 rounded-sm self-start text-white bg-cy-blue duration-20 border-solid border-2 border-transparent hover:border-gray-700 hover:bg-cy-blue disabled:opacity-50 disabled:cursor-not-allowed"
+    @click="$event => req()"
   >
     <slot></slot>
   </button>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+async function req() {
+  const res = await window.fetch('/blah')
+  const json = await res.json()
+  console.log(json)
+  return json
+}
+</script>
 
 <style></style>
