@@ -9,6 +9,7 @@
     "cypress:run": "cypress run --config video=false --component"
   },
   "dependencies": {
+    "emojisplosion": "^2.6.1",
     "autoprefixer": "^10",
     "core-js": "^3.8.3",
     "msw": "^0.39.2",
