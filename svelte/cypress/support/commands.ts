@@ -37,3 +37,4 @@
 // }
 
 export {};
+import 'cypress-plugin-api'
