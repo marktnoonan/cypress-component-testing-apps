@@ -11,7 +11,6 @@
   },
   "private": true,
   "dependencies": {
-    "emojisplosion": "^2.6.1",
     "@angular/animations": "^15.1.2",
     "@angular/common": "^15.1.2",
     "@angular/compiler": "^15.1.2",
@@ -20,6 +19,8 @@
     "@angular/platform-browser": "^15.1.2",
     "@angular/platform-browser-dynamic": "^15.1.2",
     "@angular/router": "^15.1.2",
+    "cypress-plugin-api": "^2.11.1",
+    "emojisplosion": "^2.6.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
