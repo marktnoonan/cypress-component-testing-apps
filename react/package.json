@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "emojisplosion": "^2.6.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
     "@testing-library/user-event": "^13.5.0",
@@ -12,6 +11,8 @@
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
     "cypress": "^12.14.0",
+    "cypress-plugin-api": "^2.11.1",
+    "emojisplosion": "^2.6.1",
     "msw": "^0.39.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
